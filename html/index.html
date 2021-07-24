@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Awesome Guy Javascript</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="expires" content="0" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+        <script>
+            function show_readme() {
+                $("#page_normal").hide()
+                $("#page_readme").show()
+            }
+            function hide_readme() {
+                $("#page_normal").show()
+                $("#page_readme").hide()
+            }
+        </script>
+    </head>
+    <body>
+        <ul class="w3-navbar w3-light-grey" style="width:100%;margin-left:0%">
+            <li><a href="javascript:hide_readme()">MENU:</a></li>
+            <li><a href="game.html">Play Game</a></li> 
+            <li><a href="javascript:show_readme()">Random Notes</a></li> 
+            
+            
+        </ul>
+        <div class="w3-container w3-khaki" id="page_content" style="margin-left:0%;height:100%">
+            
+            <div style="display:block;height:100%;width:600px;" id="page_normal">  
+                <h1>THE STORY:</h1> 
+                    <p>In the future, evil robot aligators take over the planet. AWESOMEGUY, the hero, 
+                     must find his way around the world, transporting to different places, collecting 
+                     points and stopping the alien aligators. Look out for platforms, 
+                     pyramids, mazes, castles, and flying steaks. You are AWESOMEGUY. Run away 
+                     from the aligators. Jump on them to kill them. Get the crystal to go to the 
+                     next level. The key is for the crystal and the rings and gold bricks are worth points. There is also a life or two
+                     out there and they are gold too. Have fun.</p>
+                     <p> 'Z' is the jump button. The arrow keys move you around. You have to get the key. Only then
+                     will the crystal transport you to the next level.</p>
+
+            </div>
+            
+            <div style="display:none;width:600px" id="page_readme">
+                <h1> NOTES:</h1>
+                <p> This game works well on Google Chrome from the 2017.03.01 time period (version 49.0.2623.75). Firefox works on the
+                    small screen only, the big screen lagging behind a second or two. If you
+                    are attached to Firefox disable the big screen and play on the small screen.</p>
+                <p> This game was originally designed for the Nintendo DS handheld gaming system as a homebrew project. 
+                    The game had ten scrolling levels and used five buttons.</p>
+                <p> Almost immediately the game was ported to the Android phone. The
+                    first port for the Android phone was also used as an independent study
+                    for the Computer Science department. Later it
+                    was also revised several times. That version of the game had 
+                    all the previous levels and also an eleventh level that sported some 3d opengl objects.</p>
+                <p> The version you are looking at was implemented entirely in html and javascript. 
+                    It has ten levels. The opengl objects from the Android version were omitted. 
+                    Also this version does not save your scores in any way.</p>
+                <p> Source code for the project can be found on github 
+                    <a href="https://github.com/radiodee1/awesome-nb-awesomeguy-js">here.</a></p>
+                <p> Source code for other projects I have worked on can be found on github here: 
+                    <a href="https://github.com/radiodee1">https://github.com/radiodee1</a>. I also have a sourceforge 
+                    account which I seldom use. As I noted above, there is an Android version of this game, and it can be found 
+                    <a href="https://play.google.com/store/apps/details?id=org.davidliebman.android.awesomeguy">here</a>.</p>
+                <p> I have a blog about these little projects, and it can be found 
+                    at 'davidliebman.org', <a href="http://www.davidliebman.org/">here</a>.</p>
+            </div>
+
+            
+        </div>
+    </body>
+</html>

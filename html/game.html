@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Awesome Guy</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="expires" content="0" >
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <script src="js/ag.js"></script>
+        <script src="js/ag_loop_draw.js"></script>
+        <script src="js/ag_loop_move.js"></script>
+        <script src="js/ag_loop_test.js"></script>
+        <script src="js/ag_loop_graph.js"></script>
+        <script src="js/ag_graph_extra.js"></script>
+        <script src="js/game_start.js"></script>
+        <script>
+            var settings = 0;
+            function flip_settings() {
+                if (settings === 0) {
+                    show_settings();
+                    settings = 1;
+                }
+                else if (settings === 1) {
+                    hide_settings();
+                    settings = 0;
+                }
+            }
+            function show_settings() {
+                $("#page_settings").show();
+                //$("#page_readme").show()
+            }
+            function hide_settings() {
+                $("#page_settings").hide();
+                //$("#page_readme").hide()
+            }
+            function change_level() {
+                var obj = document.getElementById("level_select");
+                level = obj.selectedIndex - 1;
+                if (level === -1) level = 0;
+            }
+            
+            function restart_game() {
+                clearInterval(loop_handle);
+
+                change_level();
+                //var obj = document.getElementById("level_select");
+                //level = obj.selectedIndex - 1;
+                //if (level === -1) level = 0;
+                
+                play_again = true;
+                is_end_level = true;
+                lives = 3;
+                score = 10;
+                is_game_running = true;
+                
+                
+                var obj2 = document.getElementById("collision_checkbox");
+                preferences_collision = obj2.checked;
+                click_large();
+                click_small();
+                click_sound();
+                click_graph();
+                
+                
+                testDrawLoop();
+                
+                //console.log (level + " " + preferences_collision + " " + obj2.checked);
+            }
+            function click_sound() {
+                var obj = document.getElementById("sound_checkbox");
+                preferences_sound = obj.checked;
+            }
+            function click_monsters() {
+                var obj2 = document.getElementById("collision_checkbox");
+                preferences_collision = obj2.checked;
+            }
+            function click_graph() {
+                var obj2 = document.getElementById("graph_checkbox");
+                preferences_graph_control = obj2.checked;
+            }
+            function click_large() {
+                var obj = document.getElementById("screen_checkbox");
+                preferences_larger_screen = obj.checked;
+                if (!preferences_larger_screen) {
+                    hide_large_screen();
+                }
+                else {
+                    show_large_screen();
+                }
+            }
+            function click_small() {
+                var obj = document.getElementById("small_screen_checkbox");
+                //preferences_larger_screen = obj3.checked;
+                if (!obj.checked) {
+                    hide_small_screen();
+                }
+                else {
+                    show_small_screen();
+                }
+            }
+            function hide_large_screen() {
+                $("#my_large_canvas").hide();
+                
+            }
+            function show_large_screen() {
+                $("#my_large_canvas").show();
+
+            }
+            function hide_small_screen() {
+                $("#my_canvas").hide();
+                
+            }
+            function show_small_screen() {
+                $("#my_canvas").show();
+                
+            }
+        </script>
+    </head>
+    <body>
+        <img id="concrete" src="img/concrete.png" style="display: none">
+        
+        <img id="tiles1" src="img/tiles1.png" style="display: none">
+        <img id="tiles2" src="img/tiles2.png" style="display: none">
+        <img id="tiles3" src="img/tiles3.png" style="display: none">
+        <img id="tiles4" src="img/tiles4.png" style="display: none">
+        
+        <img id="monster_l0" src="img/monster_l0.png" style="display: none">
+        <img id="monster_l1" src="img/monster_l1.png" style="display: none">
+        <img id="monster_r0" src="img/monster_r0.png" style="display: none">
+        <img id="monster_r1" src="img/monster_r1.png" style="display: none">
+        <img id="monster_ud" src="img/monster_ud.png" style="display: none">
+        <img id="monster_ud1" src="img/monster_ud1.png" style="display: none">
+        <img id="monster_ud2" src="img/monster_ud2.png" style="display: none">
+        
+        <img id="guy0" src="img/guy0.png" style="display: none">
+        <img id="guy1" src="img/guy1.png" style="display: none">
+        <img id="guy2" src="img/guy2.png" style="display: none">
+        <img id="guy3" src="img/guy3.png" style="display: none">
+
+        <img id="splash1" src="img/splash1.png" style="display: none">
+        <img id="splash2" src="img/splash2.png" style="display: none">
+        <img id="splash3" src="img/splash3.png" style="display: none">
+        
+        <div style="display: none">
+            <audio controls id="snd_boom">
+                <source src="snd/boom.mp3" type="audio/mpeg">
+            </audio>
+            <audio controls id="snd_goal">
+                <source src="snd/goal.mp3" type="audio/mpeg">
+            </audio>
+            <audio controls id="snd_ow">
+                <source src="snd/ow.mp3" type="audio/mpeg">
+            </audio>
+            <audio controls id="snd_prize">
+                <source src="snd/prize.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+        
+        <ul class="w3-navbar w3-grey" style="width:100%;margin-left:0%">
+            <li><a href="index.html">End Game</a></li> 
+            <li><a href="javascript:flip_settings();">Toggle Settings</a></li>
+            
+        </ul>
+        
+        <div id="page_header" class="w3-container w3-light-grey">Awesome Guy Game</div>
+        <div id="page_content" class="w3-container">
+            <canvas id='my_canvas' width='256' height='192' style='border:1px solid #000000;' ></canvas><br>
+            <canvas id='my_large_canvas' width='512' height='384' style='border:1px solid #000000;' ></canvas>
+
+        </div>
+        <div id="page_buttons" class="w3-container w3-light-grey">
+            <table style="border-collapse: collapse; border: 0px">
+                <tbody>
+                    <tr><td></td><td></td><td></td> <td><img src="img/button_up.png"></td> <td></td> </tr>
+                    <tr>
+                        <td><img src="img/button_b.png"></td>
+                        <td><img src="img/button_center_tx.png"></td>
+                        <td><img src="img/button_left.png"></td> 
+                        <td><img src="img/button_center_tx.png"></td> 
+                        <td><img src="img/button_right.png"></td>
+                        
+                        
+                    </tr>
+                    <tr><td></td><td></td><td></td> <td><img src="img/button_down.png"></td> <td></td> </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div id="page_footer" class="w3-container w3-light-grey">
+            <div id="page_settings" style="width:512px ;display: none;border: 1px #000000 solid">
+                <input id="small_screen_checkbox" class="w3-check" type="checkbox" checked="checked" onclick="click_small();">
+                <label class="w3-validate">Small Screen</label><br>
+                
+                <input id="screen_checkbox" class="w3-check" type="checkbox" checked="checked" onclick="click_large();">
+                <label class="w3-validate">Larger Screen</label><br>
+                
+                <input id="collision_checkbox" class="w3-check" type="checkbox" checked="checked" onclick="click_monsters();">
+                <label class="w3-validate">Monster Collision</label><br>
+                
+                <input id="sound_checkbox" class="w3-check" type="checkbox"  onclick="click_sound();">
+                <label class="w3-validate">Sound</label><br>
+                
+                <input id="graph_checkbox" class="w3-check" type="checkbox" checked="checked" onclick="click_graph();">
+                <label class="w3-validate">Monster Follow (Experimental - requires restart)</label><br>
+                
+                <select id="level_select" class="w3-select" name="option" style="width: 512px">
+                    <option value="" disabled selected>Starting Level</option>
+                    <option value="1">Level 1</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
+                    <option value="4">Level 4</option>
+                    <option value="5">Level 5</option>
+                    <option value="6">Level 6</option>
+                    <option value="7">Level 7</option>
+                    <option value="8">Level 8</option>
+                    <option value="9">Level 9</option>
+                    <option value="10">Level 10</option>
+
+                </select><br>
+                <button class="w3-btn w3-hover-grey" onclick="restart_game();" >Restart Game</button>
+
+            </div>
+        </div>
+    </body>
+</html>
