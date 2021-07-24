@@ -14,7 +14,8 @@
   ],
   "author": "David Liebman",
   "license": "",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "electron": "^13.1.7"
   }
 }
