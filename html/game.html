@@ -13,6 +13,7 @@ and open the template in the editor.
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="game.css">
         <script src="js/ag.js"></script>
         <script src="js/ag_loop_draw.js"></script>
         <script src="js/ag_loop_move.js"></script>
@@ -92,7 +93,8 @@ and open the template in the editor.
                     hide_large_screen();
                 }
                 else {
-                    show_large_screen();
+                    //show_large_screen();
+                    hide_large_screen();
                 }
             }
             function click_small() {
@@ -169,10 +171,10 @@ and open the template in the editor.
             
         </ul>
         
-        <div id="page_header" class="w3-container w3-light-grey">Awesome Guy Game</div>
-        <div id="page_content" class="w3-container">
+        <!-- div id="page_header" class="w3-container w3-light-grey">Awesome Guy Game</div -->
+        <div id="page_content" class="w3-container" style="padding: 0px;">
             <canvas id='my_canvas' width='256' height='192' style='border:1px solid #000000;' ></canvas><br>
-            <canvas id='my_large_canvas' width='512' height='384' style='border:1px solid #000000;' ></canvas>
+            <!-- canvas id='my_large_canvas' width='512' height='384' style='border:1px solid #000000;' ></canvas -->
 
         </div>
         <div id="page_buttons" class="w3-container w3-light-grey">
@@ -198,8 +200,8 @@ and open the template in the editor.
                 <input id="small_screen_checkbox" class="w3-check" type="checkbox" checked="checked" onclick="click_small();">
                 <label class="w3-validate">Small Screen</label><br>
                 
-                <input id="screen_checkbox" class="w3-check" type="checkbox" checked="checked" onclick="click_large();">
-                <label class="w3-validate">Larger Screen</label><br>
+                <!-- input id="screen_checkbox" class="w3-check" type="checkbox" checked="checked" onclick="click_large();">
+                <label class="w3-validate">Larger Screen</label><br -->
                 
                 <input id="collision_checkbox" class="w3-check" type="checkbox" checked="checked" onclick="click_monsters();">
                 <label class="w3-validate">Monster Collision</label><br>
@@ -224,7 +226,7 @@ and open the template in the editor.
                     <option value="10">Level 10</option>
 
                 </select><br>
-                <button class="w3-btn w3-hover-grey" onclick="restart_game();" >Restart Game</button>
+                <!-- button class="w3-btn w3-hover-grey" onclick="restart_game();" >Restart Game</button -->
 
             </div>
         </div>
