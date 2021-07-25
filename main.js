@@ -15,6 +15,9 @@ function createWindow () {
     width: 800, //256
     height: 600,
     webPreferences: {
+      nodeIntegration: false, // is default value after Electron v5
+      contextIsolation: true, // protect against prototype pollution
+      enableRemoteModule: false, // turn off remote
       preload: path.join(__dirname, 'preload.js')
     }
   })
@@ -63,11 +66,11 @@ app.on('ready', () => {
         click: (item, focusedWindow) => {
           dialog.showMessageBox({message: 'Sound', buttons: ['OK'] });
 
-          ipcMain.on('asynchronous-message', (event, arg) => {
+          ipcMain.on('asynchronous-reset', (event, arg) => {
             console.log(arg)
          
             // Event emitter for sending asynchronous messages
-            event.sender.send('asynchronous-reply', 'async pong')
+            event.sender.send('asynchronous-reset', 'async pong')
          })
          
         }
@@ -77,7 +80,7 @@ app.on('ready', () => {
         click: (item, focusedWindow) => {
           dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });
 
-          ipcMain.on('asynchronous-message', (event, arg) => {
+          ipcMain.on('asynchronous-reset', (event, arg) => {
             console.log(arg)
          
             // Event emitter for sending asynchronous messages
