@@ -5,23 +5,14 @@ const { Menu, app, dialog, shell, BrowserWindow } = require('electron');
 const defaultMenu = require('electron-default-menu');
 
 const path = require('path')
+const {ipcMain} = require('electron')
 
-/*
-const game = require('./html/game')
-const ag_graph_extra = require('./html/js/ag_graph_extra')
-const ag_graph = require('./html/js/ag_graph')
-const ag_loop_draw = require('./html/js/ag_loop_draw')
-const ag_loop_graph = require('./html/js/ag_loop_graph')
-const ag_loop_move = require('./html/js/ag_loop_move')
-const ag_loop_test = require('./html/js/ag_loop_test')
-const ag = require('./html/js/ag')
-const game_start = require('./html/js/game_start')
-*/
+
 
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 256, //800
+    width: 800, //256
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
@@ -32,7 +23,7 @@ function createWindow () {
   mainWindow.loadFile('html/game.html')
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -71,13 +62,29 @@ app.on('ready', () => {
         label: 'Toggle Sound',
         click: (item, focusedWindow) => {
           dialog.showMessageBox({message: 'Sound', buttons: ['OK'] });
+
+          ipcMain.on('asynchronous-message', (event, arg) => {
+            console.log(arg)
+         
+            // Event emitter for sending asynchronous messages
+            event.sender.send('asynchronous-reply', 'async pong')
+         })
+         
         }
       },
       {
         label: 'Restart Game',
         click: (item, focusedWindow) => {
           dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });
-          game.restart_game();
+
+          ipcMain.on('asynchronous-message', (event, arg) => {
+            console.log(arg)
+         
+            // Event emitter for sending asynchronous messages
+            event.sender.send('asynchronous-reset', 'async pong')
+         })
+         
+          
         }
       }
     ]
