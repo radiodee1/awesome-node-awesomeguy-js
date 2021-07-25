@@ -12,7 +12,7 @@ and open the template in the editor.
         <meta http-equiv="expires" content="0" >
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css" >
         <link rel="stylesheet" href="game.css">
         <script src="js/ag.js"></script>
         <script src="js/ag_loop_draw.js"></script>
@@ -21,6 +21,7 @@ and open the template in the editor.
         <script src="js/ag_loop_graph.js"></script>
         <script src="js/ag_graph_extra.js"></script>
         <script src="js/game_start.js"></script>
+        <!-- script src="game.js"></script -->
         <script>
             var settings = 0;
             function flip_settings() {
@@ -64,10 +65,10 @@ and open the template in the editor.
                 
                 var obj2 = document.getElementById("collision_checkbox");
                 preferences_collision = obj2.checked;
-                click_large();
-                click_small();
-                click_sound();
-                click_graph();
+                //click_large();
+                //click_small();
+                //click_sound();
+                //click_graph();
                 
                 
                 testDrawLoop();
@@ -212,7 +213,7 @@ and open the template in the editor.
                 <input id="graph_checkbox" class="w3-check" type="checkbox" checked="checked" onclick="click_graph();">
                 <label class="w3-validate">Monster Follow (Experimental - requires restart)</label><br>
                 
-                <select id="level_select" class="w3-select" name="option" style="width: 512px">
+                <select id="level_select" class="w3-select" name="option" style="width: 256px">
                     <option value="" disabled selected>Starting Level</option>
                     <option value="1">Level 1</option>
                     <option value="2">Level 2</option>
@@ -226,7 +227,7 @@ and open the template in the editor.
                     <option value="10">Level 10</option>
 
                 </select><br>
-                <!-- button class="w3-btn w3-hover-grey" onclick="restart_game();" >Restart Game</button -->
+                <button class="w3-btn w3-hover-grey" onclick="restart_game();" >Restart Game</button>
 
             </div>
         </div>

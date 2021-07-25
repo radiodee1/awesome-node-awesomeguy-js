@@ -1,6 +1,22 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+//const {app, BrowserWindow} = require('electron')
+
+const { Menu, app, dialog, shell, BrowserWindow } = require('electron');
+const defaultMenu = require('electron-default-menu');
+
 const path = require('path')
+
+/*
+const game = require('./html/game')
+const ag_graph_extra = require('./html/js/ag_graph_extra')
+const ag_graph = require('./html/js/ag_graph')
+const ag_loop_draw = require('./html/js/ag_loop_draw')
+const ag_loop_graph = require('./html/js/ag_loop_graph')
+const ag_loop_move = require('./html/js/ag_loop_move')
+const ag_loop_test = require('./html/js/ag_loop_test')
+const ag = require('./html/js/ag')
+const game_start = require('./html/js/game_start')
+*/
 
 function createWindow () {
   // Create the browser window.
@@ -16,7 +32,7 @@ function createWindow () {
   mainWindow.loadFile('html/game.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -41,3 +57,109 @@ app.on('window-all-closed', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+app.on('ready', () => {
+  // Get default menu template
+  const menu = defaultMenu(app, shell);
+
+  // Add custom menu
+  menu.splice(0, 4, {
+    label: 'Settings',
+    submenu: [
+      
+      {
+        label: 'Toggle Sound',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Sound', buttons: ['OK'] });
+        }
+      },
+      {
+        label: 'Restart Game',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });
+          game.restart_game();
+        }
+      }
+    ]
+  });
+
+  menu.splice(1, 0, {
+    label: 'Start Level',
+    submenu: [
+      {
+        label: 'Level 1',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Do 1', buttons: ['OK'] });
+          level = 0;
+        }
+      },
+      {
+        label: 'Level 2',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Do 2', buttons: ['OK'] });
+          level = 1;
+        }
+      },
+      {
+        label: 'Level 3',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Do 3', buttons: ['OK'] });
+          level = 2;
+        }
+      },
+      {
+        label: 'Level 4',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Do 4', buttons: ['OK'] });
+          level = 3;
+        }
+      },
+      {
+        label: 'Level 5',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Do 5', buttons: ['OK'] });
+          level = 4;
+        }
+      },
+      {
+        label: 'Level 6',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Do 6', buttons: ['OK'] });
+          level = 5;
+        }
+      },
+      {
+        label: 'Level 7',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Do 7', buttons: ['OK'] });
+          level = 6;
+        }
+      },
+      {
+        label: 'Level 8',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Do 8', buttons: ['OK'] });
+          level = 7;
+        }
+      },
+      {
+        label: 'Level 9',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Do 9', buttons: ['OK'] });
+          level = 8;
+        }
+      },
+      {
+        label: 'Level 10',
+        click: (item, focusedWindow) => {
+          dialog.showMessageBox({message: 'Do 10', buttons: ['OK'] });
+          level = 9;
+          game.restart_game();
+        }
+      }
+    ]
+  });
+
+  // Set application menu
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
+});

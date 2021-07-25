@@ -10,6 +10,7 @@ var move_ud = 0;
 var move_jump = 0;
 var MOVE_CONST = 3;
 
+
 $(window).on( "load", function() {
     
     if (true ) {
@@ -41,3 +42,4 @@ $(window).on( "load", function() {
         setupDrawFunctionsB();
     }
 });
+
