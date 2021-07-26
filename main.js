@@ -74,7 +74,15 @@ app.on('ready', () => {
           //dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });          
           mainWindow.webContents.send("restart", "restart");
         }
+      },
+      {
+        label: 'View Text',
+        click: (item, focusedWindow) => {
+          //dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });          
+          mainWindow.webContents.send("text", "text");
+        }
       }
+
     ]
   });
 

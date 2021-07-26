@@ -21,5 +21,12 @@ window.api.receive("level", (data) => {
    restart_game();
 });
 
-var obj = document.getElementById("my_canvas");
-obj.focus();
+window.api.receive("text", (data) => {
+   //console.log(`Received text ${data} from main process`);
+   window.location = "./index.html";
+   //document.getElementById('end_game').click();
+   //process.exit();
+});
+
+//var obj = document.getElementById("my_canvas");
+//obj.focus();
