@@ -9,16 +9,31 @@ window.api.receive("sound", (data) => {
 });
 
 window.api.receive("restart", (data) => {
-   //console.log(`Received restart ${data} from main process`);
-   restart_game();
+
+   try {
+      restart_game();
+   }
+   catch (err) {
+      window.location = "./game.html";
+      restart_game();
+   }
+   //restart_game();
 });
 
 window.api.receive("level", (data) => {
-   //console.log(`Received level ${data} from main process`);
-   level = + data;
-   var obj = document.getElementById("level_select");
-   obj.selectedIndex = level + 1;
-   restart_game();
+   try {
+      level = + data;
+      var obj = document.getElementById("level_select");
+      obj.selectedIndex = level + 1;
+      restart_game();
+   }
+   catch(err) {
+      window.location = "./game.html";
+      //level = + data;
+      //var obj = document.getElementById("level_select");
+      //obj.selectedIndex = level + 1;
+      //restart_game();
+   }
 });
 
 window.api.receive("text", (data) => {
