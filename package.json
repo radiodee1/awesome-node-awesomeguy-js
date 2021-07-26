@@ -14,7 +14,9 @@
   ],
   "author": "David Liebman",
   "license": "",
-  "devDependencies": {},
+  "devDependencies": {
+    "electron-packager": "^15.3.0"
+  },
   "dependencies": {
     "electron": "^13.1.7",
     "electron-default-menu": "^1.0.2",
