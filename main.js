@@ -11,8 +11,8 @@ let mainWindow;
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800, //256
-    height: 600,
+    width: 256, //800
+    height: 300,
     webPreferences: {
       nodeIntegration: false, // is default value after Electron v5
       contextIsolation: true, // protect against prototype pollution
@@ -25,7 +25,7 @@ function createWindow () {
   mainWindow.loadFile('html/game.html')
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -173,4 +173,10 @@ app.on('ready', () => {
 
   // Set application menu
   Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
+});
+
+app.on('show', () => {
+  setTimeout(() => {
+    app.focus();
+  }, 200);
 });
