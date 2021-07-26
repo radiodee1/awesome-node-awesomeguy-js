@@ -1,16 +1,17 @@
+//console.log('process log')
 
-
-window.api.receive("asynchronous-reset", (data) => {
-   console.log(`Received ${data} from main process`);
+window.api.receive("sound", (data) => {
+   console.log(`Received toggle sound ${data} from main process`);
 });
-//import {ipcRenderer} from 'electron';
-// Synchronous message emmiter and handler
-//console.log(ipcRenderer.sendSync('synchronous-message', 'sync ping')) 
 
-// Async message handler
-/*
-ipcRenderer.on('asynchronous-reset', (event, arg) => {
-   console.log(arg);
-   console.log('pong');
-})
-*/
+window.api.receive("restart", (data) => {
+   console.log(`Received restart ${data} from main process`);
+});
+
+window.api.receive("level", (data) => {
+   console.log(`Received level ${data} from main process`);
+   level = + data;
+   var obj = document.getElementById("level_select");
+   obj.selectedIndex = level + 1;
+   restart_game();
+});

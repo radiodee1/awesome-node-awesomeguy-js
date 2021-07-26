@@ -5,13 +5,12 @@ const { Menu, app, dialog, shell, BrowserWindow } = require('electron');
 const defaultMenu = require('electron-default-menu');
 
 const path = require('path')
-const {ipcMain} = require('electron')
 
-
+let mainWindow;
 
 function createWindow () {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800, //256
     height: 600,
     webPreferences: {
@@ -64,107 +63,109 @@ app.on('ready', () => {
       {
         label: 'Toggle Sound',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Sound', buttons: ['OK'] });
-
-          ipcMain.on('asynchronous-reset', (event, arg) => {
-            console.log(arg)
-         
-            // Event emitter for sending asynchronous messages
-            event.sender.send('asynchronous-reset', 'async pong')
-         })
-         
+          //dialog.showMessageBox({message: 'Sound', buttons: ['OK'] });
+          mainWindow.webContents.send("sound", "sound");
+     
         }
       },
       {
         label: 'Restart Game',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });
-
-          ipcMain.on('asynchronous-reset', (event, arg) => {
-            console.log(arg)
-         
-            // Event emitter for sending asynchronous messages
-            event.sender.send('asynchronous-reset', 'async pong')
-         })
-         
-          
+          //dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });          
+          mainWindow.webContents.send("restart", "restart");
         }
       }
     ]
   });
 
   menu.splice(1, 0, {
-    label: 'Start Level',
+    label: 'Level',
     submenu: [
       {
         label: 'Level 1',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Do 1', buttons: ['OK'] });
+          //dialog.showMessageBox({message: 'Do 1', buttons: ['OK'] });
           level = 0;
+          mainWindow.webContents.send("level", level);
+
         }
       },
       {
         label: 'Level 2',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Do 2', buttons: ['OK'] });
+          //dialog.showMessageBox({message: 'Do 2', buttons: ['OK'] });
           level = 1;
+          mainWindow.webContents.send("level", level);
+
         }
       },
       {
         label: 'Level 3',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Do 3', buttons: ['OK'] });
+          //dialog.showMessageBox({message: 'Do 3', buttons: ['OK'] });
           level = 2;
+          mainWindow.webContents.send("level", level);
+
         }
       },
       {
         label: 'Level 4',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Do 4', buttons: ['OK'] });
+          //dialog.showMessageBox({message: 'Do 4', buttons: ['OK'] });
           level = 3;
+          mainWindow.webContents.send("level", level);
+
         }
       },
       {
         label: 'Level 5',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Do 5', buttons: ['OK'] });
+          //dialog.showMessageBox({message: 'Do 5', buttons: ['OK'] });
           level = 4;
+          mainWindow.webContents.send("level", level);
+
         }
       },
       {
         label: 'Level 6',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Do 6', buttons: ['OK'] });
+          //dialog.showMessageBox({message: 'Do 6', buttons: ['OK'] });
           level = 5;
+          mainWindow.webContents.send("level", level);
+
         }
       },
       {
         label: 'Level 7',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Do 7', buttons: ['OK'] });
+          //dialog.showMessageBox({message: 'Do 7', buttons: ['OK'] });
           level = 6;
+          mainWindow.webContents.send("level", level);
         }
       },
       {
         label: 'Level 8',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Do 8', buttons: ['OK'] });
+          //dialog.showMessageBox({message: 'Do 8', buttons: ['OK'] });
           level = 7;
+          mainWindow.webContents.send("level", level);
         }
       },
       {
         label: 'Level 9',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Do 9', buttons: ['OK'] });
+          //dialog.showMessageBox({message: 'Do 9', buttons: ['OK'] });
           level = 8;
+          mainWindow.webContents.send("level", level);
         }
       },
       {
         label: 'Level 10',
         click: (item, focusedWindow) => {
-          dialog.showMessageBox({message: 'Do 10', buttons: ['OK'] });
+          //dialog.showMessageBox({message: 'Do 10', buttons: ['OK'] });
           level = 9;
-          game.restart_game();
+          mainWindow.webContents.send("level", level);
+          
         }
       }
     ]
