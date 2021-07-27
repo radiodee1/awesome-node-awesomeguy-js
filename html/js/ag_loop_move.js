@@ -552,6 +552,7 @@
                 
 		//mMovementV.setScrollX(screenX);
 		//mMovementV.setScrollY(screenY);
+		testImageMag();
 	}
         
 	function checkRegularCollisions() {

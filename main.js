@@ -188,7 +188,7 @@ app.on('ready', () => {
         label: '1',
         click: (item, focusedWindow) => {
           //dialog.showMessageBox({message: 'Sound', buttons: ['OK'] });
-          mainWindow.webContents.send("size", "1");
+          mainWindow.webContents.send("size", 1);
           scale = 1;
           mainWindow.setSize(256 * scale, 192 * scale + 308);
         }
@@ -197,20 +197,18 @@ app.on('ready', () => {
         label: '2',
         click: (item, focusedWindow) => {
           //dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });          
-          mainWindow.webContents.send("size", "2");
+          mainWindow.webContents.send("size", 2);
           scale = 2;
           mainWindow.setSize(256 * scale, 192 * scale + 308);
-
         }
       },
       {
         label: '4',
         click: (item, focusedWindow) => {
           //dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });          
-          mainWindow.webContents.send("size", "4");
+          mainWindow.webContents.send("size", 4);
           scale = 4;
           mainWindow.setSize(256 * scale, 192 * scale + 308);
-
         }
       }
 

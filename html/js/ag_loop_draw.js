@@ -327,7 +327,7 @@ function setLevelData(a,  b, horizontal, vertical) {
 
 	var i,j;
 	keysonlevel = false;
-        exitblocked = false;
+    exitblocked = false;
         
 	// FIRST PASS ///////////////
 	for (i = 0 ; i < vertical ; i ++ ) {
@@ -372,7 +372,6 @@ function setLevelData(a,  b, horizontal, vertical) {
 	monster_num = 0;
 	sprite_num = 0;
 	platform_num = -1;
-	
 	
 	
 	return;
