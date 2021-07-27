@@ -7,12 +7,13 @@ const defaultMenu = require('electron-default-menu');
 const path = require('path')
 
 let mainWindow;
+let scale = 1;
 
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 256, //800
-    height: 300, //600 
+    width: 256 * (+ scale), //800
+    height: 300 * (+ scale), //600 
     webPreferences: {
       nodeIntegration: false, // is default value after Electron v5
       contextIsolation: true, // protect against prototype pollution
@@ -176,6 +177,43 @@ app.on('ready', () => {
           
         }
       }
+    ]
+  });
+
+  menu.splice(2, 0, {
+    label: 'Size',
+    submenu: [
+      
+      {
+        label: '1',
+        click: (item, focusedWindow) => {
+          //dialog.showMessageBox({message: 'Sound', buttons: ['OK'] });
+          mainWindow.webContents.send("size", "1");
+          scale = 1;
+          mainWindow.setSize(256 * scale, 192 * scale + 308);
+        }
+      },
+      {
+        label: '2',
+        click: (item, focusedWindow) => {
+          //dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });          
+          mainWindow.webContents.send("size", "2");
+          scale = 2;
+          mainWindow.setSize(256 * scale, 192 * scale + 308);
+
+        }
+      },
+      {
+        label: '4',
+        click: (item, focusedWindow) => {
+          //dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });          
+          mainWindow.webContents.send("size", "4");
+          scale = 4;
+          mainWindow.setSize(256 * scale, 192 * scale + 308);
+
+        }
+      }
+
     ]
   });
 
