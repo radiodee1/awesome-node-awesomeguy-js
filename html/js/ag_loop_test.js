@@ -158,12 +158,13 @@ function testImageMag() {
     image.src = c.toDataURL();
     const width = scale * 256;
     const height = scale * 192;
-    cctx.drawImage(image, 0, 0, width, height)
     //cc.width = width;
     //cc.height = height;
     cc.style.width = width;
     cc.style.height = height;
     //cctx.drawImage(image, 0,0, 512, 384);
+    cctx.drawImage(image, 0, 0, width, height)
+
 }
 
 function isMobile() {
