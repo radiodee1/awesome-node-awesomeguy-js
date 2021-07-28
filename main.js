@@ -190,7 +190,7 @@ app.on('ready', () => {
           //dialog.showMessageBox({message: 'Sound', buttons: ['OK'] });
           mainWindow.webContents.send("size", 1);
           scale = 1;
-          mainWindow.setSize(256 * scale, 192 * scale + 308);
+          mainWindow.setSize(256 * scale, 192 * scale + 108);
         }
       },
       {
@@ -199,7 +199,7 @@ app.on('ready', () => {
           //dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });          
           mainWindow.webContents.send("size", 2);
           scale = 2;
-          mainWindow.setSize(256 * scale, 192 * scale + 308);
+          mainWindow.setSize(256 * scale, 192 * scale + 108);
         }
       },
       {
@@ -208,7 +208,7 @@ app.on('ready', () => {
           //dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });          
           mainWindow.webContents.send("size", 4);
           scale = 4;
-          mainWindow.setSize(256 * scale, 192 * scale + 308);
+          mainWindow.setSize(256 * scale, 192 * scale + 108);
         }
       }
 

@@ -160,6 +160,7 @@ function testImageMag() {
     const height = scale * 192;
     //cc.width = width;
     //cc.height = height;
+    //cctx.scale(scale, scale);
     cc.style.width = width;
     cc.style.height = height;
     //cctx.drawImage(image, 0,0, 512, 384);
