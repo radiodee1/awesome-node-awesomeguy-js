@@ -158,14 +158,13 @@ function testImageMag() {
     image.src = c.toDataURL();
     const width = scale * 256;
     const height = scale * 192;
-    //cc.width = width;
-    //cc.height = height;
-    //cctx.scale(scale, scale);
-    cc.style.width = width;
-    cc.style.height = height;
-    //cctx.drawImage(image, 0,0, 512, 384);
-    cctx.drawImage(image, 0, 0, width, height)
+    
+    cc.style.width = width;//`${width}px`;
+    cc.style.height = height;// `${height}px`;
+    //c.style.display = 'none';
 
+    cctx.drawImage(image, 0, 0, width, height)
+    //$( "#page_buttons" ).load( "game.html #page_buttons" );
 }
 
 function isMobile() {
