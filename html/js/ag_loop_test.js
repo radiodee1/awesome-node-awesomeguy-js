@@ -152,24 +152,25 @@ function testImageMag() {
     if (scale == 0) scale = 1;
 
     let width = scale * 256 ;
-    let height = scale * 192 ;
+    let height = scale * 192 + 96;
     
     var c = document.getElementById("my_canvas");
     var ctx = c.getContext("2d");
     var img = ctx.getImageData(0,0,256,192);
+
     var cc = document.getElementById("my_large_canvas");
-    
     var cctx = cc.getContext("2d");
-    
     var image = new Image();
     image.src = c.toDataURL();
     
-    cc.style.width = width;// `${width }px`;
-    cc.style.height = height;//`${height }px`;
-    
-    cctx.drawImage(image, 0, 0, width, height)
-    
-    //$( "#page_buttons" ).load( "../game.html #page_buttons" );
+    //cc.style.width = width;// `${width }px`;
+    //cc.style.height = height;//`${height }px`;
+    //cc.width = width;// `${width }px`;
+    //cc.height = height;//`${height }px`;
+    cctx.drawImage(image, 0, 0, width, height);
+
+    var x = document.getElementById("controls");
+    cctx.drawImage(x, 0, height - 96 );
 }
 
 function isMobile() {
