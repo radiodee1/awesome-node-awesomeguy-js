@@ -148,23 +148,28 @@ function testDrawSplash() {
 function testImageMag() {
     //console.log("mag");
     //if (! preferences_larger_screen ) return;
+    //const start_scale = 2;
     if (scale == 0) scale = 1;
+
+    let width = scale * 256 ;
+    let height = scale * 192 ;
+    
     var c = document.getElementById("my_canvas");
     var ctx = c.getContext("2d");
     var img = ctx.getImageData(0,0,256,192);
     var cc = document.getElementById("my_large_canvas");
+    
     var cctx = cc.getContext("2d");
+    
     var image = new Image();
     image.src = c.toDataURL();
-    const width = scale * 256;
-    const height = scale * 192;
     
-    cc.style.width = width;//`${width}px`;
-    cc.style.height = height;// `${height}px`;
-    //c.style.display = 'none';
-
+    cc.style.width = width;// `${width }px`;
+    cc.style.height = height;//`${height }px`;
+    
     cctx.drawImage(image, 0, 0, width, height)
-    //$( "#page_buttons" ).load( "game.html #page_buttons" );
+    
+    //$( "#page_buttons" ).load( "../game.html #page_buttons" );
 }
 
 function isMobile() {
