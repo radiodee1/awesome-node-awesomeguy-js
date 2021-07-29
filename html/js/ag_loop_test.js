@@ -163,10 +163,7 @@ function testImageMag() {
     var image = new Image();
     image.src = c.toDataURL();
     
-    //cc.style.width = width;// `${width }px`;
-    //cc.style.height = height;//`${height }px`;
-    //cc.width = width;// `${width }px`;
-    //cc.height = height;//`${height }px`;
+    
     cctx.drawImage(image, 0, 0, width, height);
 
     var x = document.getElementById("controls");
