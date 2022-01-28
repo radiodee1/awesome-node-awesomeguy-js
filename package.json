@@ -4,6 +4,7 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
+    "dev": "electron-builder",
     "start": "electron ."
   },
   "repository": "",
