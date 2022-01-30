@@ -1,9 +1,9 @@
 app-id: org.theguy.TheGuy
 runtime: org.freedesktop.Platform
-runtime-version: '20.08'
+runtime-version: '21.08'
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: '20.08'
+base-version: '21.08'
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.node14
 command: run.sh
@@ -49,6 +49,6 @@ modules:
         . ../flatpak-node/electron-builder-arch-args.sh
         npm run dist -- $ELECTRON_BUILDER_ARCH_ARGS   --linux --dir
       # Bundle app and dependencies
-      - cp -a dist/linux*unpacked /app/main
+      - 'cp -a dist/linux*unpacked /app/main'
       # Install app wrapper
-      - install -Dm755 -t /app/bin/ ../run.sh
+      - 'install -Dm755 -t /app/bin/ ../run.sh'
