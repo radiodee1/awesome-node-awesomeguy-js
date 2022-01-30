@@ -24,6 +24,7 @@ modules:
     buildsystem: simple
     build-options:
       env:
+        # electron_config_cache: /run/build/TheGuy/npm-cache
         XDG_CACHE_HOME: /run/build/TheGuy/flatpak-node/cache
         npm_config_cache: /run/build/TheGuy/flatpak-node/npm-cache
         npm_config_nodedir: /usr/lib/sdk/node14
@@ -36,7 +37,7 @@ modules:
       - generated-sources.json
       # Wrapper to launch the app
       - type: script
-        dest-filename: run.sh
+        dest: run.sh
         commands:
           - zypak-wrapper.sh /app/main/TheGuy "$@"
     build-commands:
@@ -46,7 +47,7 @@ modules:
       # in package.json runs electron-builder
       - |
         . ../flatpak-node/electron-builder-arch-args.sh
-        npm run dist -- $ELECTRON_BUILDER_ARCH_ARGS  --linux --dir
+        npm run dist -- $ELECTRON_BUILDER_ARCH_ARGS   --linux --dir
       # Bundle app and dependencies
       - cp -a dist/linux*unpacked /app/main
       # Install app wrapper

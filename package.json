@@ -1,10 +1,10 @@
 {
-  "name": "Awesomeguy",
+  "name": "TheGuy",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "dev": "electron-builder",
+    "dist": "electron-builder",
     "start": "electron ."
   },
   "repository": "",
@@ -16,11 +16,12 @@
   "author": "David Liebman",
   "license": "",
   "devDependencies": {
-    "electron-packager": "^15.3.0"
+    "electron": "^12.0.11",
+    "electron-default-menu": "^1.0.2",
+    "jquery": "^3.6.0",
+    "electron-builder": "^22.11.7"
   },
   "dependencies": {
-    "electron": "^13.1.7",
-    "electron-default-menu": "^1.0.2",
     "jquery": "^3.6.0"
   }
 }
