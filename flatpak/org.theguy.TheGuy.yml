@@ -1,4 +1,4 @@
-app-id: org.theguy.the-guy
+app-id: org.theguy.TheGuy
 runtime: org.freedesktop.Platform
 runtime-version: '21.08'
 sdk: org.freedesktop.Sdk
