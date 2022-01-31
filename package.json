@@ -1,5 +1,5 @@
 {
-  "name": "TheGuy",
+  "name": "the-guy",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
@@ -16,7 +16,7 @@
   "author": "David Liebman",
   "license": "",
   "devDependencies": {
-    "electron": "^16.0.8",
+    "electron": "^14.2.5",
     "electron-default-menu": "^1.0.2",
     "jquery": "^3.6.0",
     "electron-builder": "^22.11.7"
