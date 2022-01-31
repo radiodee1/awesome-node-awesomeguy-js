@@ -14,6 +14,10 @@
     "game"
   ],
   "author": "David Liebman",
+  "dependencies": {
+    "electron-default-menu": "^1.0.2",
+    "jquery": "^3.6.0"
+  },
   "license": "",
   "devDependencies": {
     "electron": "^14.2.5",
