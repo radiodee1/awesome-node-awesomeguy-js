@@ -203,11 +203,11 @@ app.on('ready', () => {
         }
       },
       {
-        label: '4',
+        label: '3',
         click: (item, focusedWindow) => {
           //dialog.showMessageBox({message: 'Restart', buttons: ['OK'] });          
-          mainWindow.webContents.send("size", 4);
-          scale = 4;
+          mainWindow.webContents.send("size", 3);
+          scale = 3;
           mainWindow.setSize(256 * scale, 192 * scale + 108);
         }
       }
