@@ -16,6 +16,8 @@ and open the template in the editor.
         <!-- link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css" -->
         <link rel="stylesheet" href="jquery/w3.css" >
         <link rel="stylesheet" href="game.css">
+
+        <!-- script src="js/model/model.js" type="text/javascript"></script -->
         <script src="js/ag.js" type="text/javascript"></script>
         <script src="js/ag_loop_draw.js" type="text/javascript"></script>
         <script src="js/ag_loop_move.js" type="text/javascript"></script>
@@ -51,7 +53,7 @@ and open the template in the editor.
                 if (level === -1) level = 0;
             }
             
-            function restart_game() {
+            function restart_game(local_scale=1) {
                 clearInterval(loop_handle);
 
                 change_level();
@@ -74,7 +76,7 @@ and open the template in the editor.
                 //click_graph();
                 
                 
-                testDrawLoop();
+                testDrawLoop(local_scale);
                 
                 //console.log (level + " " + preferences_collision + " " + obj2.checked);
             }

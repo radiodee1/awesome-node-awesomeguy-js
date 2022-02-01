@@ -6,6 +6,7 @@
 
 
 
+//import * as model from './js/model/model.js';
 
 function testPlayGameAgain() {
     //level = 0;
@@ -69,7 +70,8 @@ function testDraw() {
     
 }
 
-function testDrawLoop() {
+function testDrawLoop(local_scale=1) {
+    scale = local_scale;
     is_end_level = true;
     //level = 0;
     score = 10;
@@ -149,6 +151,7 @@ function testImageMag() {
     //console.log("mag");
     //if (! preferences_larger_screen ) return;
     //const start_scale = 2;
+    //scale = model.scale;
     if (scale == 0) scale = 1;
 
     let width = scale * 256 ;

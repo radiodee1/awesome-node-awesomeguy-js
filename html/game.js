@@ -1,6 +1,9 @@
 //console.log('process log')
 let scale = 1;
 
+//import * as model from './js/model/model.js';
+//scale = model.scale;
+
 window.api.receive("sound", (data) => {
    //console.log(`Received toggle sound ${data} from main process`);
    var obj = document.getElementById("sound_checkbox");
@@ -12,11 +15,11 @@ window.api.receive("sound", (data) => {
 window.api.receive("restart", (data) => {
 
    try {
-      restart_game();
+      restart_game(scale);
    }
    catch (err) {
       window.location = "./game.html";
-      restart_game();
+      restart_game(scale);
    }
    //restart_game();
 });
@@ -26,7 +29,7 @@ window.api.receive("level", (data) => {
       level = + data;
       var obj = document.getElementById("level_select");
       obj.selectedIndex = level + 1;
-      restart_game();
+      restart_game(scale);
    }
    catch(err) {
       window.location = "./game.html";
@@ -40,9 +43,10 @@ window.api.receive("level", (data) => {
 window.api.receive("size", (data) => {
    try {
       scale = (+ data);
+      //model.scale = (+ data);
       //var obj = document.getElementById("level_select");
       //obj.selectedIndex = level + 1;
-      restart_game();
+      restart_game(scale);
    }
    catch(err) {
       window.location = "./game.html";
