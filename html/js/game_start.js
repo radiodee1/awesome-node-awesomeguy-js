@@ -22,11 +22,12 @@ $(window).on( "load", function() {
             //// call game fn here
             if (input_key === AG.LEFT) move_lr = - MOVE_CONST;//guy.x --;
             if (input_key === AG.UP) move_ud = - MOVE_CONST; //guy.y --;
-            if (input_key === AG.RIGHT) move_lr = MOVE_CONST;// ++;
-            if (input_key === AG.DOWN) move_ud = MOVE_CONST;
-            if (input_key === AG.JUMP) move_jump = MOVE_CONST;
+            if (input_key === AG.RIGHT) move_lr = + MOVE_CONST;// ++;
+            if (input_key === AG.DOWN) move_ud = + MOVE_CONST;
+            if (input_key === AG.JUMP) move_jump = + MOVE_CONST;
             //drawLevel(0);
-
+            x = move_lr;
+            y = move_ud;
         });
 
         $(document).keyup(function(e) {
