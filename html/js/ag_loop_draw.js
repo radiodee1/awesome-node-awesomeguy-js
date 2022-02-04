@@ -739,15 +739,15 @@ function changeImageData(from, x, y, scroll_x, scroll_y) {
 
   var paint_all = 0;
   var extra = 0;
-  //var screen = getScreenPointer(0);
   var width = from.width;
   var height = from.height;
 
   var i, j, k, l, m;
   k = (x - scroll_x) * 4;
   l = y - scroll_y;
-  //screen.putImageData(from, k, l);
   var screenz = getScreenImageData();
+  
+  console.log("scroll_x,scroll_y "+ scroll_x + ", " + scroll_y);
 
   for (i = 0; i < height; i++) {
     for (j = 0; j < width * 4; j += 4) {
@@ -766,7 +766,7 @@ function changeImageData(from, x, y, scroll_x, scroll_y) {
           newx >= 0 &&
           newy >= 0 &&
           newx < AG.SCREEN_WIDTH * 4 &&
-          newy < AG.SCREEN_HEIGHT
+          newy < AG.SCREEN_HEIGHT // * 4 // change here...
         ) {
           screenz.data[(l + i) * AG.SCREEN_WIDTH * 4 + (j + k + 0)] = r;
           screenz.data[(l + i) * AG.SCREEN_WIDTH * 4 + (j + k + 1)] = g;
@@ -845,7 +845,6 @@ function drawSprite_16(from, x, y, scroll_x, scroll_y, paint_all, extra) {
   var i, j, k, l;
   k = x - scroll_x;
   l = y - scroll_y;
-  //screen.putImageData(from, k, l);
   if (draw || true) screen.putImageData(p, 0, 0);
 
   return;
@@ -867,7 +866,6 @@ function drawSprite_16(from, x, y, scroll_x, scroll_y, paint_all, extra) {
  */
 function drawSprite_40_8(from, x, y, scroll_x, scroll_y, paint_all, extra) {
   var i, j, k, l;
-  //var screen = getScreenPointer(0);
 
   k = x - scroll_x;
   l = y - scroll_y;
@@ -917,14 +915,11 @@ function drawTile_8(
   extra
 ) {
   var i, j, m, n;
-  //var screen = (getScreenPointer(0));
 
   m = screen_x - scroll_x;
 
   n = screen_y - scroll_y;
 
-  //var offscreen_data = offscreen_context.getImageData(x, y, width, height);
-  //alert(scroll_x + " " + screen_x);
   screen.putImageData(tile, m, n); //n * AG.SCREEN_WIDTH, m);
 
   /*
@@ -969,17 +964,7 @@ function cutTile(tileset, tile_ignore, num) {
 
   var canvas_id = document.getElementById("canvas_" + tileset);
   var ctx = canvas_id.getContext("2d");
-  //ctx.drawImage(img_id,0,0);//width,height);
-  //
-  //var z;
-  //var image = new Image(width, height);
-  //image.src = "img/"+ from;
-
-  //var ctx = canvas_id.getContext("2d");
-  //if (l !== l || k !== k) {
-  //    l = 0;
-  //    k = 0;
-  //}
+ 
   if (l !== l) l = 0;
   if (k !== k) k = 0;
   var z = ctx.getImageData(
@@ -1352,8 +1337,6 @@ function drawMonsters() {
         if (is_up_down === true) {
           moveSpriteToLadder(i);
 
-          //drawSprite_16(monster_u, sprite[i].x, sprite[i].y,
-          //		scrollx, scrolly, PAINT_TRANSPARENT, 0);
 
           if (z === 0) {
             //(R.drawable.monster_r0);
@@ -1436,7 +1419,6 @@ function drawMonsters() {
 }
 
 function shiftSpriteDirections(num) {
-  //console.log("<----- shift sprite directions " + num + " " + sprite[num].directions.length);
   //sprite[num].node = -1;
   //sprite[num].move = 0;
   return;
@@ -1761,7 +1743,6 @@ function drawLevel(unused) {
   var levelcheat = 1;
   //var square[TILE_HEIGHT][TILE_WIDTH];
 
-  //var  screen = (getScreenPointer(0));
 
   //animate = animate_level;
   animate = newBG + 1;
@@ -1913,8 +1894,11 @@ function getScreenPointer(screen_enum) {
 }
 
 function getScreenImageData() {
+
+  //console.log("inner-screen: "+ scrollx + "," + scrolly);
   var ctx = getScreenPointer(0);
   var image = ctx.getImageData(0, 0, AG.SCREEN_WIDTH, AG.SCREEN_HEIGHT);
+  // 0, 0 for scrollx, scrolly
   return image;
 }
 

@@ -330,9 +330,9 @@ function scrollBg() {
   //x = move_lr;
   //y = move_ud;
 
-  console.log("map:" + (mapV * 8) + " guy:" + mapY);
-  console.log('screen:' + screenX + "," + screenY);
-  console.log('LR_MARGIN:' + LR_MARGIN + ' TB_MARGIN:' + TB_MARGIN);
+  console.log("map:" + mapH * 8 + ", " + mapV * 8 + " guy:" + mapY);
+  console.log("screen:" + screenX + ", " + screenY);
+  console.log("LR_MARGIN:" + LR_MARGIN + " TB_MARGIN:" + TB_MARGIN);
 
   newMapX = mapX;
   newMapY = mapY;
@@ -369,7 +369,7 @@ function scrollBg() {
 
     if (mapX + x >= mapH * 8 - guyWidth) {
       newMapX = mapH * 8 - guyWidth;
-      newX = mScreenW - guyWidth;
+      newX = AG.SCREEN_TILES_H * 8 - guyWidth;
     }
 
     if (mapX + x >= oldX + LR_MARGIN) {
@@ -436,44 +436,51 @@ function scrollBg() {
   }
   //canScroll = true;
   // some tests //
-  //console.log(mapY + " mapY"); 
+  //console.log(level_w + " level_w");
 
-  canScroll = true;
-  canScrollVert = true;
+  //canScroll = true;
+  //canScrollVert = true;
   //////////////////////////////////////
   if (y > 0) {
     if (oldY > mapV * 8) oldY = -1;
 
     if (oldY >= (mapV - 24) * 8 - y) {
       canScroll = false;
-      canScrollVert = false;
-    }
-    else {
+    } else {
       canScroll = true;
-      canScrollVert = true;
     }
 
     //move DOWN?
-    if (mapY + y >= mapV * 8 - guyHeight) {
+    if (mapY + y >= level_h * 8 - guyHeight) {
       newMapY = mapV * 8 - guyHeight;
-      newY = 24 * 8 - guyHeight;
+      newY = level_h * 8 - guyHeight;
     }
 
-    if (mapY + y >= oldY + TB_MARGIN) {
+    if (mapY + y >= oldY + TB_MARGIN  ) {
       if (canScroll) {
         screenY += y;
         newMapY += y;
+        newY += y; // add me!!
       } else if (mapY <= mapV * 8 - guyHeight) {
         newY += y;
         newMapY += y;
       }
-    } else if (mapY + y <= oldY + TB_MARGIN && canScroll) {
+    } else if (mapY + y <= oldY + TB_MARGIN && canScroll ) {
       //move sprite?
       newY += y;
       newMapY += y;
-      //screenY += y;
+      screenY += y; // add me!!
     }
-    //y = 0;
+
+    if (mapY + y >= oldY + (level_h * 8 - TB_MARGIN) - guyHeight && false) {
+      if (canScroll) {
+        screenY += y;
+        newMapY += y;
+      } else {
+        newY += y;
+        newMapY += y;
+      }
+    }
   }
   //////////////////////////////////////
   else if (y < 0 && !mRejectUp) {
@@ -516,7 +523,6 @@ function scrollBg() {
   if (mapX - screenX >= AG.SCREEN_TILES_H * 8 - guyWidth - x && x > 0) {
     //console.log("pass");
     newX = screenX + AG.SCREEN_TILES_H * 8 - guyWidth - x;
-    //x = 0;
   }
 
   guy.x = newX; // newMapX;
@@ -825,53 +831,4 @@ function pointToBlockNum(x, y) {
 }
 
 /*
-	native function setLevelData( var [] a_map, var [] b_map,var width, var height);
-	native function setObjectsDisplay(var map_x, var map_y, var value);
-	native var getObjectsDisplay(var x, var y);
-	native function setGuyData(var [] a, var [] b, var [] c, var [] d);
-	native function setMonsterData(var [] a, var [] b, var [] c, var [] d);
-	native function setMovingPlatformData(var []a);
-	native function inactivateMonster(var num);
-	native function setTileMapData( var [] a, var [] b, var [] c, var [] d);
-	native function addMonster(var map_x, var map_y, var animate_index);
-	native function addPlatform(var map_x, var map_y);
-	native function setGuyPosition(var x, var y, var scrollx, var scrolly, var animate);
-	native function setScoreLives(long score, var lives);
-    native function setMonsterPreferences(var monsters, var collision);
-    native function setJNIAnimateOnly(var animate);
-    native function setScreenData(var screenH, var screenV);
-	native function drawLevel(); // <-- remove me!!
-	native var getSoundBoom();
-	native var getSoundOw();
-	native var getSoundPrize();
-	native var getEndLevel();
-	native long getScore();
-	native var getLives();
-	native function incrementJniScore(long num);
-	native var getSpriteX(var num);
-	native var getSpriteY(var num);
-	native var getSpriteFacingRight(var num);
-	native var setJNIScroll(var x, var y);
-	//opengl native methods
-	native function JNIinit();
-	native function JNIdraw();
-	native function JNIresize(var w, var h);
-	native function JNIsetVersion(var v);
-	native function JNIbuildLevel();
-	native function setColorOnlyJNI(var c);
-	//mesh native methods
-    native function setupMeshJNI();
-	native function setMeshDataJNI(var [] vertices, short [] faces, var [] normals, var[] texture, var obj_num, var part_num, var copy_obj, var copy_part);
-	native function enableObjectPartJNI(var object_num, var part_num, var var_show, var x, var y, var z, var w);
-	native function enableObjectJNI(var object_num, var var_show, var x, var y, var z, var w);
-    native function setObjectPropertiesJNI(var object_num, var part_num, var r, var g, var b, var a);
-	native function setObjectCheatJNI(var obj, var part, var x, var y, var z, var w);
-	native function setObjectMagJNI(var obj, var part, var x, var y, var z);
-	native function setObjectRotJNI(var obj, var part, var angle, var x, var y, var z);
-    native function setObjectCopyJNI(var obj, var part, var copy_obj, var copy_part);
-    native function setObjectCheatRotJNI(var obj, var part, var angle, var x, var y, var z);
-	native function resetObjectCopyJNI(var obj, var part, var copy_obj, var copy_part);
-	native function resetObjectMagRotJNI(var obj, var part, var copy_obj, var copy_part);
-	native function resetObjectColorJNI(var obj, var part, var copy_obj, var copy_part, var r, var g, var b ); //usage is tricky!!
-	native function resetObjectDrawNormalsJNI(var obj, var part, var var_normals );
-	*/
+*/

@@ -8,3 +8,8 @@ html,body {
     display: none;
     overflow: hidden;
 }
+
+canvas {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
