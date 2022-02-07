@@ -322,7 +322,7 @@ function scrollBg() {
   //x = move_lr;
   //y = move_ud;
 
-  console.log("map:" + mapH + ", " + mapV + " guy:" + mapY);
+  //console.log("map:" + mapH + ", " + mapV + " guy:" + mapY);
   //console.log("screen:" + screenX + ", " + screenY);
   //console.log("LR_MARGIN:" + LR_MARGIN + " TB_MARGIN:" + TB_MARGIN);
 
@@ -425,18 +425,17 @@ function scrollBg() {
   }
   //canScroll = true;
   // some tests //
-
+  console.log("map v: " + mapV);
   //canScroll = true;
   //canScrollVert = true;
   //////////////////////////////////////
   if (y > 0) {
-    if (mapY > mapV * 8) oldY = -1;
+    if (mapY > mapV * 8 ) oldY = -1;
 
-    if (oldY >= (mapV + 24) * 8 - y && false) { // <-- mapH must be changed !! level_h does not work. mapH works some...
-      //canScroll = false;
+    if (oldY >= (mapV - 24) * 8 + TB_MARGIN + guyHeight * 2 - y ) { 
+    // ^-- must be changed !! level #1 works some... not #3
       canScrollVert = false;
     } else {
-      //canScroll = true;
       canScrollVert = true;
     }
 
@@ -447,14 +446,15 @@ function scrollBg() {
     }
 
     if (mapY + y >= oldY + TB_MARGIN) {
-      if (canScrollVert) {
+      if (canScrollVert ) {
         screenY += y;
         newMapY += y;
+        //newY += y;
       } else  if (mapY <= (mapV * 8 ) - guyHeight) {
         newY += y;
         newMapY += y;
       }
-    } else if (mapY + y <= oldY + TB_MARGIN && canScrollVert) {
+    } else if (mapY + y <= oldY + TB_MARGIN && canScrollVert ) {
       newY += y;
       newMapY += y;
       //screenY += y;
@@ -503,14 +503,11 @@ function scrollBg() {
     newX = screenX + AG.SCREEN_TILES_H * 8 - guyWidth - x;
   }
 
-  guy.x = newX; // newMapX;
-  guy.y = newY; // newMapY;
+  guy.x =  newX; // newMapX;
+  guy.y =  newY; // newMapY;
 
   scrollx = screenX;
   scrolly = screenY;
-
-  //guy.y = y + guy.y;
-  //guy.x = x + guy.x;
 
   testImageMag();
 }

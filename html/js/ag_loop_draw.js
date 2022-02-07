@@ -194,27 +194,6 @@ function startSound(id) {
   snd.play();
 }
 
-/*
-function getSoundOw() {
-	var temp = sound_ow;
-	sound_ow = false;
-	return temp;
-}
-
-
-function getSoundPrize() {
-	var temp = sound_prize;
-	sound_prize = false;
-	return temp;
-}
-
-
-function getSoundBoom() {
-	var temp = sound_boom;
-	sound_boom = false;
-	return temp;
-}
-*/
 
 /* NEED INTERFACE WITH JAVA */
 
@@ -428,8 +407,10 @@ function setGuyPosition(guy_x, guy_y, scroll_x, scroll_y, guy_animate) {
   guy.y = guy_y;
   guy.animate = guy_animate;
   animate = guy_animate;
-  //scrollx = scroll_x;
-  //scrolly = scroll_y;
+  scrollx = scroll_x;
+  scrolly = scroll_y;
+  scrollX = scroll_x;
+  scrollY = scroll_y;
 }
 
 /**
@@ -744,7 +725,9 @@ function changeImageData(from, x, y, scroll_x, scroll_y) {
   l = y - scroll_y;
   var screenz = getScreenImageData();
 
-  console.log("scroll_x,scroll_y " + scroll_x + ", " + scroll_y);
+  console.log("width,height " + width + ", " + height);
+
+  //return screenz;
 
   for (i = 0; i < height; i++) {
     for (j = 0; j < width * 4; j += 4) {
@@ -829,7 +812,6 @@ function drawSprite_16(from, x, y, scroll_x, scroll_y, paint_all, extra) {
   var draw = true;
   var screen = getScreenPointer(0);
   if (x - scroll_x < 0) {
-    //x = scroll_x; // do this in 'changeImageData()' instead
     draw = false;
   }
   if (y - scroll_y < 0) {
@@ -868,23 +850,7 @@ function drawSprite_40_8(from, x, y, scroll_x, scroll_y, paint_all, extra) {
   l = y - scroll_y;
   screen.putImageData(from, k, l);
 
-  /*
-    for (i = 0; i < AG.PLATFORM_HEIGHT; i ++ ) {
-    	for (j = 0; j < AG.PLATFORM_WIDTH; j ++) {
-    		if ( (i + l) >= 0 && (j + k) >= 0 && (j+k) < AG.SCREEN_WIDTH && (i+l) < AG.SCREEN_HEIGHT ) {
-    			
-    			if (paint_all == 1 && from[i][j] == extra ) {
-    				
-    			}
-    			else {
-	    			//screen[i + l][j + k] =color_pixel( from[i][j]);
-				screen[((l + i) * AG.SCREEN_WIDTH )  +(j +k ) ] = color_pixel(from[i][j]);
-	    		}
-
-    		}
-    	}
-    }
-    */
+  /*       */
   return;
 }
 
@@ -919,24 +885,7 @@ function drawTile_8(
 
   screen.putImageData(tile, m, n); //n * AG.SCREEN_WIDTH, m);
 
-  /*
-    for (i = 0; i < AG.TILE_HEIGHT; i ++ ) {
-    	for (j = 0; j < AG.TILE_WIDTH; j ++) {
-    		if ( (i + n) >= 0 && (j + m) >= 0 && (i+n) < AG.SCREEN_HEIGHT  && (j+m) <  AG.SCREEN_WIDTH ) {
-    			if ( paint_all == 1 && tile[i][j] == extra ) {
-    				//
-    			}
-    			else {
-    			
-	    			//screen[i + n ][j + m] = tile[i][j];
-	    			//screen[i + n ][j + m] = color_pixel( tile[i][j]);
-				    screen[((n + i) * AG.SCREEN_WIDTH )  +(j +m ) ] = color_pixel(tile[i][j]);
-	    			//LOGE("drawing tile %i", tile[i][j]);
-	    		}
-    		} 
-    	}
-    }
-    */
+  /*    */
   return;
 }
 /**
@@ -1160,7 +1109,6 @@ function drawMonsters() {
           if (map_objects[xx + 2][yy] === AG.B_BLOCK) markerTest = true;
           if (map_objects[xx + 2][yy] === AG.B_MARKER) markerTest = true;
           if (map_objects[xx + 2][yy + 1] === 0) markerTest = true;
-          //if(map_objects[xx+2][yy+1] !== AG.B_BLOCK && map_objects[ xx-1][yy] === AG.B_LADDER) {
           //sprite[i].x += move;
           //markerTest = true;
           //}
@@ -1181,7 +1129,6 @@ function drawMonsters() {
           if (map_objects[xx][yy] === AG.B_BLOCK) markerTest = true;
           if (map_objects[xx][yy] === AG.B_MARKER) markerTest = true;
           if (map_objects[xx - 1][yy + 1] === 0) markerTest = true;
-          //if(map_objects[xx-1][yy+1] !== AG.B_BLOCK && map_objects[ xx -1][yy] === AG.B_LADDER) {
           //sprite[i].x -= move;
           //markerTest = true;
           //}
@@ -1248,10 +1195,8 @@ function drawMonsters() {
             map_objects[xx][yy] === AG.B_LADDER ||
             map_objects[xx][yy + 1] === AG.B_LADDER ||
             true)
-          //map_objects[xx][yy+2] === AG.B_LADDER //|| map_objects[xx][yy+3] === AG.B_LADDER
         ) {
           if (sprite[i].y > sprite[i].barriery * 8) {
-            //console.log("up ladder! "+ sprite[i].y + " " + sprite[i].barriery * 8 );
             sprite[i].y -= move;
             is_up_down = true;
           } else {
@@ -1606,7 +1551,6 @@ function collisionWithMonsters() {
 
   var guyBox = makeSpriteBox(guy, 0, 0);
 
-  //console.log("monster " + monster_offset + " " + monster_num + " " + sprite_num);
   for (i = monster_offset; i < monster_num; i++) {
     var monsterBox = makeSpriteBox(sprite[i], 0, 0);
     var test = collisionSimple(guyBox, monsterBox);
@@ -1749,6 +1693,8 @@ function drawLevel(unused) {
   ctx.rect(0, 0, AG.SCREEN_WIDTH, AG.SCREEN_HEIGHT);
   ctx.fillStyle = "black";
   ctx.fill();
+
+  console.log(tilesHeightMeasurement," height", tilesWidthMeasurement, " width");
 
   /* draw background */
   baseX = Math.floor(scrollx / AG.TILE_WIDTH);
@@ -2018,11 +1964,15 @@ function setStartingScrollPosition() {
 
   //scrollX = 0;
   //scrollY = 0;
+  var guy_height = AG.GUY_HEIGHT;
+  if (guy_height == 0) {
+    guy_height = 16;
+  }
 
   var flag = false;
 
-  i = guy.x; //mGameV.getSprite(0).getMapPosX();
-  j = guy.y; //mGameV.getSprite(0).getMapPosY();
+  i = guy.x; // 
+  j = guy.y; //  + guy_height * 2;  // 
 
   //scroll screen to starting location of guy...
   while (i > (AG.SCREEN_TILES_H / 2) * 8 && flag === false) {
@@ -2032,7 +1982,7 @@ function setStartingScrollPosition() {
     } else flag = true;
   }
   flag = false;
-  while (j > (AG.SCREEN_TILES_V / 2) * 8 && flag === false) {
+  while (j > (AG.SCREEN_TILES_V / 2 ) * 8  && flag === false) {
     if (scrolly + AG.SCREEN_TILES_V * 8 < level_h * 8) {
       scrolly += 8;
       j = j - 8; // Y
@@ -2040,9 +1990,11 @@ function setStartingScrollPosition() {
   }
 
   //scrolly = guy.y - (AG.SCREEN_TILES_V / 2) * 8 ;
-
+  if (scrolly > AG.SCREEN_TILES_V / 2) {
+    scrolly += guy_height * 4;
+  }
   scrollX = scrollx;
-  scrollY = scrolly;
+  scrollY = scrolly;// + guy_height;
 }
 
 function checkValues() {
