@@ -1,7 +1,4 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 
 var PAINT_SOLID = 0;
@@ -93,8 +90,8 @@ level_h = 0;
 level_w = 0;
 //lives = 3;
 
-scrollx = 0;
-scrolly = 0;
+//scrollx = 0;
+//scrolly = 0;
 animate = 0;
 
 //score = 10;
@@ -431,8 +428,8 @@ function setGuyPosition(guy_x, guy_y, scroll_x, scroll_y, guy_animate) {
   guy.y = guy_y;
   guy.animate = guy_animate;
   animate = guy_animate;
-  scrollx = scroll_x;
-  scrolly = scroll_y;
+  //scrollx = scroll_x;
+  //scrolly = scroll_y;
 }
 
 /**
@@ -746,8 +743,8 @@ function changeImageData(from, x, y, scroll_x, scroll_y) {
   k = (x - scroll_x) * 4;
   l = y - scroll_y;
   var screenz = getScreenImageData();
-  
-  console.log("scroll_x,scroll_y "+ scroll_x + ", " + scroll_y);
+
+  console.log("scroll_x,scroll_y " + scroll_x + ", " + scroll_y);
 
   for (i = 0; i < height; i++) {
     for (j = 0; j < width * 4; j += 4) {
@@ -964,7 +961,7 @@ function cutTile(tileset, tile_ignore, num) {
 
   var canvas_id = document.getElementById("canvas_" + tileset);
   var ctx = canvas_id.getContext("2d");
- 
+
   if (l !== l) l = 0;
   if (k !== k) k = 0;
   var z = ctx.getImageData(
@@ -1336,7 +1333,6 @@ function drawMonsters() {
       if (sprite[i].visible === true && visibility === show) {
         if (is_up_down === true) {
           moveSpriteToLadder(i);
-
 
           if (z === 0) {
             //(R.drawable.monster_r0);
@@ -1743,7 +1739,6 @@ function drawLevel(unused) {
   var levelcheat = 1;
   //var square[TILE_HEIGHT][TILE_WIDTH];
 
-
   //animate = animate_level;
   animate = newBG + 1;
 
@@ -1894,7 +1889,6 @@ function getScreenPointer(screen_enum) {
 }
 
 function getScreenImageData() {
-
   //console.log("inner-screen: "+ scrollx + "," + scrolly);
   var ctx = getScreenPointer(0);
   var image = ctx.getImageData(0, 0, AG.SCREEN_WIDTH, AG.SCREEN_HEIGHT);
@@ -2022,6 +2016,9 @@ function setStartingScrollPosition() {
   scrollx = 0;
   scrolly = 0;
 
+  //scrollX = 0;
+  //scrollY = 0;
+
   var flag = false;
 
   i = guy.x; //mGameV.getSprite(0).getMapPosX();
@@ -2030,7 +2027,6 @@ function setStartingScrollPosition() {
   //scroll screen to starting location of guy...
   while (i > (AG.SCREEN_TILES_H / 2) * 8 && flag === false) {
     if (scrollx + AG.SCREEN_TILES_H * 8 < level_w * 8) {
-      //mMovementV.incrementScrollX(8);
       scrollx += 8;
       i = i - 8; // X
     } else flag = true;
@@ -2038,13 +2034,15 @@ function setStartingScrollPosition() {
   flag = false;
   while (j > (AG.SCREEN_TILES_V / 2) * 8 && flag === false) {
     if (scrolly + AG.SCREEN_TILES_V * 8 < level_h * 8) {
-      //mMovementV.incrementScrollY(8);
       scrolly += 8;
       j = j - 8; // Y
     } else flag = true;
   }
 
-  //console.log(scrollx + " " + scrolly + " w:" + level_w + " h:" + level_h);
+  //scrolly = guy.y - (AG.SCREEN_TILES_V / 2) * 8 ;
+
+  scrollX = scrollx;
+  scrollY = scrolly;
 }
 
 function checkValues() {

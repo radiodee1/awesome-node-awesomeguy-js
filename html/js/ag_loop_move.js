@@ -6,13 +6,29 @@
 //	    JNIbuildLevel();
 //}
 
+canScrollVert = true;
+
 function setPanelScroll(xxx, yyy) {
   scrollX = xxx;
   scrollY = yyy;
+
+  scrollx = xxx;
+  scrolly = yyy;
+
   mGuySprite = guy; //mGameV.getSpriteStart();
   var mGuyX = mGuySprite.x;
   var mGuyY = mGuySprite.y;
-
+  console.log(
+    level_h +
+      " calc: " +
+      mGuySprite.y +
+      " (" +
+      scrollX +
+      ", " +
+      scrollY +
+      ") " +
+      level_h * 8
+  );
   setGuyPosition(mGuyX, mGuyY, scrollX, scrollY, newGuy);
 }
 
@@ -244,38 +260,14 @@ function collisionWithPlatforms(canFall) {
   temp = false;
 
   /*
-  var numx = Math.floor((guy.x )/ 8);
   
-  var numy = Math.floor((guy.y + guy.bottomBB)/ 8);
-  if(numy >= level_h) numy = level_h -1;
-  if(numx >= level_w) numx = level_w -1;
-
-  var num = map_objects[numx][numy];
-  var vis = map_level[numx][numy];
-
-  if (num === AG.B_SPACE && vis !== AG.B_SPACE && numy >= level_h -1) {
-      temp = true;
-      canJump = true;
-  }
   */
 
   for (i = platform_offset + 1; i <= platform_num; i++) {
     j = i; // i - 1;
     /* get info from JNI on platform position */
     /*
-                        var mSprite = sprite[j];
-                        console.log(mSprite.rightBB + " " + mSprite.topBB + " " + mSprite.bottomBB);
-                        
-                        
-		    var mTempSprite = new SpriteInfo( 0, 8, 0, 40);
-		    
-		  	mTempSprite.setMapPosX(    getSpriteX(j));
-		  	mTempSprite.setMapPosY(    getSpriteY(j));
-		  	if(   sprite[j].facingRight === 1) mFacingRight = true;
-		  	else mFacingRight = false;
-		  	mTempSprite.setFacingRight(mFacingRight);
-		  	//Log.e("Platforms", "x="+mTempSprite.getMapPosX() + " y=" + mTempSprite.getMapPosY()	);
-		  	*/
+ 	 	*/
 
     /* check platform */
     platformBox = makeSpriteBox(sprite[j], 0, 0);
@@ -315,30 +307,30 @@ function scrollBg() {
   /* scroll registers for background */
   var mRejectUp = false;
 
-  canScroll = true;
-  canScrollVert = true;
-  oldX = scrollx; // mMovementV.getScrollX();
-  oldY = scrolly; // mMovementV.getScrollY();
-  screenX = oldX;
-  screenY = oldY;
-  let mapH = level_w; // mGameV.getMapH();
-  let mapV = level_h; // mGameV.getMapV();
+  let canScroll = true;
+  let canScrollVert = true;
+  let oldX = scrollx; // mMovementV.getScrollX();
+  let oldY = scrolly; // mMovementV.getScrollY();
+  let screenX = oldX;
+  let screenY = oldY;
+  let mapH = level_w; //
+  let mapV = level_h; // map_list[level - 1].ydim;// level_h; 
 
-  mapX = guy.x; //mGuySprite.getMapPosX();
-  mapY = guy.y; //mGuySprite.getMapPosY();
+  let mapX = guy.x; //mGuySprite.getMapPosX();
+  let mapY = guy.y; //mGuySprite.getMapPosY();
 
   //x = move_lr;
   //y = move_ud;
 
-  console.log("map:" + mapH * 8 + ", " + mapV * 8 + " guy:" + mapY);
-  console.log("screen:" + screenX + ", " + screenY);
-  console.log("LR_MARGIN:" + LR_MARGIN + " TB_MARGIN:" + TB_MARGIN);
+  console.log("map:" + mapH + ", " + mapV + " guy:" + mapY);
+  //console.log("screen:" + screenX + ", " + screenY);
+  //console.log("LR_MARGIN:" + LR_MARGIN + " TB_MARGIN:" + TB_MARGIN);
 
-  newMapX = mapX;
-  newMapY = mapY;
+  let newMapX = mapX;
+  let newMapY = mapY;
 
-  newX = mapX;
-  newY = mapY;
+  let newX = mapX;
+  let newY = mapY;
 
   //mapH = level_h;
   //mapW = level_w;
@@ -346,8 +338,8 @@ function scrollBg() {
   //newX = mGuySprite.getX();
   //newY = mGuySprite.getY();
 
-  guyWidth = guy.rightBB - guy.leftBB + 5; //15; // 12 ?
-  guyHeight = guy.bottomBB - guy.topBB;
+  let guyWidth = guy.rightBB - guy.leftBB + 5; //15; // 12 ?
+  let guyHeight = guy.bottomBB - guy.topBB;
 
   var tilesMeasurement = 32;
   var mScreenW = AG.SCREEN_TILES_H * 8;
@@ -396,9 +388,6 @@ function scrollBg() {
       if (mCanFallAtEdge) y = MOVE_CONST; //mMovementV.getVMove();
       //console.log("very special case...");
     }
-
-    //if (newX <= guyWidth + 1) console.log("newX s:" + screenX + " x:"+ x);
-    //x = 0;
   }
 
   //////////////////////////////////////
@@ -436,50 +425,39 @@ function scrollBg() {
   }
   //canScroll = true;
   // some tests //
-  //console.log(level_w + " level_w");
 
   //canScroll = true;
   //canScrollVert = true;
   //////////////////////////////////////
   if (y > 0) {
-    if (oldY > mapV * 8) oldY = -1;
+    if (mapY > mapV * 8) oldY = -1;
 
-    if (oldY >= (mapV - 24) * 8 - y) {
-      canScroll = false;
+    if (oldY >= (mapV + 24) * 8 - y && false) { // <-- mapH must be changed !! level_h does not work. mapH works some...
+      //canScroll = false;
+      canScrollVert = false;
     } else {
-      canScroll = true;
+      //canScroll = true;
+      canScrollVert = true;
     }
 
     //move DOWN?
-    if (mapY + y >= level_h * 8 - guyHeight) {
+    if (mapY + y >= mapV * 8 - guyHeight) {
       newMapY = mapV * 8 - guyHeight;
-      newY = level_h * 8 - guyHeight;
+      newY = AG.SCREEN_TILES_V * 8 - guyHeight;
     }
 
-    if (mapY + y >= oldY + TB_MARGIN  ) {
-      if (canScroll) {
+    if (mapY + y >= oldY + TB_MARGIN) {
+      if (canScrollVert) {
         screenY += y;
         newMapY += y;
-        newY += y; // add me!!
-      } else if (mapY <= mapV * 8 - guyHeight) {
+      } else  if (mapY <= (mapV * 8 ) - guyHeight) {
         newY += y;
         newMapY += y;
       }
-    } else if (mapY + y <= oldY + TB_MARGIN && canScroll ) {
-      //move sprite?
+    } else if (mapY + y <= oldY + TB_MARGIN && canScrollVert) {
       newY += y;
       newMapY += y;
-      screenY += y; // add me!!
-    }
-
-    if (mapY + y >= oldY + (level_h * 8 - TB_MARGIN) - guyHeight && false) {
-      if (canScroll) {
-        screenY += y;
-        newMapY += y;
-      } else {
-        newY += y;
-        newMapY += y;
-      }
+      //screenY += y;
     }
   }
   //////////////////////////////////////
@@ -831,4 +809,4 @@ function pointToBlockNum(x, y) {
 }
 
 /*
-*/
+ */

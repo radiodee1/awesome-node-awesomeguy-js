@@ -93,6 +93,9 @@ function testDrawPrep() {
   level_h = map_list[room].ydim;
   level_w = map_list[room].xdim;
 
+  //console.log(level_w + "," + level_h);
+  //process.exit();
+
   setLevelData(
     map_list[room].visible,
     map_list[room].hidden,

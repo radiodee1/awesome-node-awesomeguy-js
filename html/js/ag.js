@@ -1,7 +1,4 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 
 
@@ -73,7 +70,7 @@ var mHighScores = 0;
 var mDisplayViewWidth = 0;
 //Matrix mMatrix;
 
-var scrollX, scrollY;
+//var scrollX, scrollY;
 
 var mGuySprite;
 var mP;
