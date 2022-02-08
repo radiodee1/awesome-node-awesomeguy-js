@@ -7,7 +7,7 @@
     "dist": "electron-builder",
     "start": "electron ."
   },
-  "repository": "",
+  "repository": "https://github.com/radiodee1/awesome-node-awesomeguy-js.git",
   "keywords": [
     "Electron",
     "demo",
