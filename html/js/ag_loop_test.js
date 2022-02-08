@@ -150,15 +150,17 @@ function testImageMag() {
 
   let width = scale * 256;
   let height = scale * 192 + 96;
-
+  let context = {
+    antialias: false
+  }
   //console.log("scroll: " + scrollx + " -- " + scrolly);
   var c = document.getElementById("my_canvas");
-  var ctx = c.getContext("2d");
+  var ctx = c.getContext("2d", context);
   var img = ctx.getImageData(0, 0, 256, 192); 
   // 0,0 here for scrollx, scrolly!!
 
   var cc = document.getElementById("my_large_canvas");
-  var cctx = cc.getContext("2d");
+  var cctx = cc.getContext("2d", context);
   var image = new Image();
   image.src = c.toDataURL();
 
