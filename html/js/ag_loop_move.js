@@ -18,17 +18,6 @@ function setPanelScroll(xxx, yyy) {
   mGuySprite = guy; //mGameV.getSpriteStart();
   var mGuyX = mGuySprite.x;
   var mGuyY = mGuySprite.y;
-  console.log(
-    level_h +
-      " calc: " +
-      mGuySprite.y +
-      " (" +
-      scrollX +
-      ", " +
-      scrollY +
-      ") " +
-      level_h * 8
-  );
   setGuyPosition(mGuyX, mGuyY, scrollX, scrollY, newGuy);
 }
 
@@ -425,7 +414,7 @@ function scrollBg() {
   }
   //canScroll = true;
   // some tests //
-  console.log("map v: " + mapV);
+  //console.log("map v: " + mapV);
   //canScroll = true;
   //canScrollVert = true;
   //////////////////////////////////////

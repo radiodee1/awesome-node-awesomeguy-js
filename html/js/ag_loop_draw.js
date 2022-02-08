@@ -725,7 +725,7 @@ function changeImageData(from, x, y, scroll_x, scroll_y) {
   l = y - scroll_y;
   var screenz = getScreenImageData();
 
-  console.log("width,height " + width + ", " + height);
+ // console.log("width,height " + width + ", " + height);
 
   //return screenz;
 
@@ -1694,7 +1694,7 @@ function drawLevel(unused) {
   ctx.fillStyle = "black";
   ctx.fill();
 
-  console.log(tilesHeightMeasurement," height", tilesWidthMeasurement, " width");
+  //console.log(tilesHeightMeasurement," height", tilesWidthMeasurement, " width");
 
   /* draw background */
   baseX = Math.floor(scrollx / AG.TILE_WIDTH);
